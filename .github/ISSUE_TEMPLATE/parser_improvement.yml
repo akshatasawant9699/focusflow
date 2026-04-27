@@ -1,0 +1,87 @@
+name: Parser Improvement
+description: Report an issue with paste parsing or suggest a new format to support
+title: "[Parser]: "
+labels: ["parser", "enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The paste parser is a critical feature of FocusFlow. If it fails to detect a list format from Goblin.tools, ChatGPT, Claude, Notion, or other sources, we want to know.
+
+  - type: dropdown
+    id: source
+    attributes:
+      label: Source of the pasted text
+      description: Where did the text come from?
+      options:
+        - Goblin.tools
+        - ChatGPT
+        - Claude
+        - Notion
+        - Microsoft To Do
+        - Apple Reminders
+        - Google Keep
+        - Email
+        - Hand-typed
+        - Other (specify below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: sample
+    attributes:
+      label: Sample text that failed to parse
+      description: |
+        Paste the exact text that didn't parse correctly (anonymize if needed).
+        This will be added to our parser corpus for testing.
+      placeholder: Paste the problematic text here
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected parsing result
+      description: What steps should the parser have extracted?
+      placeholder: |
+        Step 1: ...
+        Step 2: ...
+        Step 3: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual parsing result
+      description: What did the parser actually produce?
+      placeholder: Describe what went wrong (no steps detected, wrong order, etc.)
+    validations:
+      required: true
+
+  - type: textarea
+    id: pattern
+    attributes:
+      label: Pattern or format details
+      description: What makes this format unique? (indentation, numbering style, special characters)
+      placeholder: e.g., uses tabs for nesting, roman numerals, emoji bullets
+
+  - type: checkboxes
+    id: willing-to-pr
+    attributes:
+      label: Are you willing to submit a PR to improve the parser?
+      options:
+        - label: Yes, I can implement the fix
+        - label: I need guidance on the parser code
+        - label: No, I cannot work on this
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission checklist
+      options:
+        - label: I have anonymized any personal information in the sample text
+          required: true
+        - label: I have checked existing parser issues to avoid duplicates
+          required: true

@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/akshatasawant9699/focusflow/discussions
+    about: Ask questions, share ideas, or discuss FocusFlow with the community
+  - name: Design Principles
+    url: https://github.com/akshatasawant9699/focusflow/blob/main/docs/design-principles.md
+    about: Review ADHD-specific design constraints before proposing UI changes
+  - name: Roadmap
+    url: https://github.com/akshatasawant9699/focusflow/blob/main/docs/roadmap.md
+    about: Check the project roadmap to see what's already planned

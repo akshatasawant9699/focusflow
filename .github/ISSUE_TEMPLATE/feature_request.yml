@@ -1,0 +1,109 @@
+name: Feature Request
+description: Suggest a new feature or enhancement for FocusFlow
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a feature. Please provide as much detail as possible to help us understand your request.
+
+        Note: FocusFlow is focused on being an execution layer for ADHD brains. Features should align with helping users actually do tasks, not planning or breakdown (we delegate that to other tools).
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: Describe the pain point or gap this feature would address
+      placeholder: When I try to..., I struggle with...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: How would you like this problem to be solved?
+      placeholder: I would like FocusFlow to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What other approaches have you tried or considered?
+      placeholder: I tried using... but...
+
+  - type: dropdown
+    id: adhd-relevance
+    attributes:
+      label: ADHD-specific benefit
+      description: How does this feature specifically help ADHD users?
+      options:
+        - Reduces decision fatigue
+        - Improves time perception
+        - Reduces executive function load
+        - Supports working memory
+        - Manages hyperfocus risk
+        - Reduces shame/guilt
+        - Other (explain below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: alignment
+    attributes:
+      label: How does this align with FocusFlow's mission?
+      description: |
+        FocusFlow is the execution layer between "I have a plan" and "I'm doing it."
+        How does your feature fit this scope?
+      placeholder: This helps execution by...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: user-type
+    attributes:
+      label: Would this be useful for most users?
+      description: Is this a common need or a niche use case?
+      options:
+        - Essential for most users
+        - Useful for many users
+        - Helpful for some users
+        - Niche use case
+    validations:
+      required: true
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples or mockups
+      description: If applicable, provide examples, screenshots, or mockups of how this would work
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Any other context or considerations for this feature
+
+  - type: checkboxes
+    id: willing-to-implement
+    attributes:
+      label: Are you willing to implement this feature?
+      options:
+        - label: Yes, I can implement this
+        - label: I need guidance on implementation
+        - label: No, I cannot implement this
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission checklist
+      options:
+        - label: I have searched existing issues to ensure this is not a duplicate
+          required: true
+        - label: I have reviewed the roadmap to see if this is already planned
+          required: true
+        - label: This feature aligns with FocusFlow's focus on execution, not planning
+          required: true

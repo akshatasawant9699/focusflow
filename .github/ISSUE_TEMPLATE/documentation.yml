@@ -1,0 +1,67 @@
+name: Documentation Improvement
+description: Suggest improvements to documentation, guides, or examples
+title: "[Docs]: "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve FocusFlow's documentation. Clear docs make the project more accessible.
+
+  - type: dropdown
+    id: doc-type
+    attributes:
+      label: Type of documentation
+      description: What type of documentation needs improvement?
+      options:
+        - User guide
+        - Developer setup guide
+        - API documentation
+        - Self-hosting guide
+        - Design principles
+        - Contributing guide
+        - Code comments
+        - README
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: Which file or page needs improvement?
+      placeholder: e.g., docs/self-hosting.md, README.md, component comments
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue
+    attributes:
+      label: What is unclear or missing?
+      description: Describe the problem with the current documentation
+      placeholder: The documentation for... is confusing because...
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested improvement
+      description: How would you improve this documentation?
+      placeholder: I suggest...
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Any other details that would help improve the documentation
+
+  - type: checkboxes
+    id: willing-to-pr
+    attributes:
+      label: Are you willing to submit a PR to improve the documentation?
+      options:
+        - label: Yes, I can write or update the docs
+        - label: I need guidance on what to write
+        - label: No, I cannot work on this
