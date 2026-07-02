@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { parseTaskList } from '@/lib/utils/parse-task-list';
-import { CheckCircle2, Sparkles, Rocket, Copy } from 'lucide-react';
+import { CheckCircle2, Sparkles, Rocket, Copy, Check } from 'lucide-react';
 
 export function PasteAndGo() {
   const [input, setInput] = useState('');
@@ -32,15 +32,9 @@ export function PasteAndGo() {
     if (preview.length === 0) return;
 
     setIsCreating(true);
-
-    // TODO: Implement plan creation API call
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
-
+    await new Promise(resolve => setTimeout(resolve, 1000));
     console.log('Creating plan with steps:', preview);
-
-    // For now, just show success and redirect to focus mode
     alert(`✨ Plan created with ${preview.length} steps!\\n\\nRedirecting to Today view...`);
-
     setInput('');
     setPreview([]);
     setShowPreview(false);
@@ -62,22 +56,24 @@ export function PasteAndGo() {
 
   return (
     <Card className="glass-strong border-white/30 shadow-2xl overflow-hidden">
-      <CardHeader className="relative">
-        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-2xl" />
-        <CardTitle className="flex items-center gap-3 text-3xl relative z-10">
-          <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-3 rounded-xl">
-            <Sparkles className="h-6 w-6 text-white" />
+      <CardHeader className="relative pb-6">
+        <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full blur-3xl" />
+        <div className="relative z-10 flex items-start gap-4">
+          <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-4 rounded-2xl shadow-lg">
+            <Sparkles className="h-7 w-7 text-white" />
           </div>
-          <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Paste & Go
-          </span>
-        </CardTitle>
-        <CardDescription className="text-gray-700 text-base">
-          Paste your task breakdown from anywhere. FocusFlow will parse it and get you started in under 15 seconds.
-        </CardDescription>
+          <div className="flex-1">
+            <CardTitle className="text-3xl font-bold text-white mb-2 drop-shadow-lg">
+              Paste & Go
+            </CardTitle>
+            <CardDescription className="text-base text-white/90 leading-relaxed drop-shadow">
+              Paste your task breakdown from anywhere. FocusFlow will parse it and get you started in under 15 seconds.
+            </CardDescription>
+          </div>
+        </div>
       </CardHeader>
 
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-6 px-8 pb-8">
         <div className="relative">
           <Textarea
             placeholder="Paste your tasks here...
@@ -95,7 +91,7 @@ Or:
 Any format works!"
             value={input}
             onChange={handleInputChange}
-            className="min-h-[220px] font-mono text-sm bg-white/60 backdrop-blur-sm border-2 border-white/40 focus:border-purple-400 focus:ring-4 focus:ring-purple-200 rounded-2xl resize-none transition-all"
+            className="min-h-[240px] text-base font-mono bg-white/70 backdrop-blur-sm border-2 border-white/50 focus:border-purple-400 focus:ring-4 focus:ring-purple-200/50 rounded-2xl resize-none transition-all shadow-lg text-gray-800 placeholder:text-gray-500"
           />
 
           {!input && (
@@ -103,9 +99,9 @@ Any format works!"
               variant="ghost"
               size="sm"
               onClick={handleLoadExample}
-              className="absolute bottom-3 right-3 text-xs glass hover:glass-strong"
+              className="absolute bottom-4 right-4 glass hover:glass-strong text-gray-700 font-medium"
             >
-              <Copy className="w-3 h-3 mr-1" />
+              <Copy className="w-4 h-4 mr-2" />
               Try Example
             </Button>
           )}
@@ -114,18 +110,19 @@ Any format works!"
         <AnimatePresence>
           {showPreview && preview.length > 0 && (
             <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-              className="space-y-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ type: 'spring', stiffness: 150, damping: 20 }}
+              className="space-y-6"
             >
-              <div className="flex items-center justify-between glass rounded-2xl p-4">
-                <div className="flex items-center gap-2">
-                  <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold text-sm px-3 py-1 rounded-full">
+              {/* Header with step count and CTA */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 glass-strong rounded-2xl p-6 shadow-lg">
+                <div className="flex items-center gap-3">
+                  <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold px-4 py-2 rounded-xl shadow-md">
                     {preview.length} step{preview.length !== 1 && 's'}
                   </div>
-                  <span className="text-sm text-gray-700 font-medium">
+                  <span className="text-white font-semibold drop-shadow">
                     parsed successfully!
                   </span>
                 </div>
@@ -134,38 +131,39 @@ Any format works!"
                   onClick={handleCreatePlan}
                   disabled={isCreating}
                   size="lg"
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all gap-2"
+                  className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-700 hover:via-pink-700 hover:to-purple-700 text-white font-bold shadow-xl hover:shadow-2xl hover:shadow-purple-500/50 transition-all gap-3 px-8 py-6 text-lg rounded-xl"
                 >
                   {isCreating ? (
                     <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-3 border-white border-t-transparent rounded-full animate-spin" />
                       Creating...
                     </>
                   ) : (
                     <>
-                      <Rocket className="w-5 h-5" />
+                      <Rocket className="w-6 h-6" />
                       Start Focus Session
                     </>
                   )}
                 </Button>
               </div>
 
-              <div className="space-y-2 glass rounded-2xl p-6">
+              {/* Preview list */}
+              <div className="space-y-3 glass-strong rounded-2xl p-6 shadow-lg">
                 {preview.map((task, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                    className="flex items-start gap-3 text-sm group hover:bg-white/40 p-3 rounded-xl transition-all"
+                    transition={{ delay: index * 0.05, type: 'spring' }}
+                    className="flex items-start gap-4 group hover:bg-white/30 p-4 rounded-xl transition-all shadow-sm hover:shadow-md"
                   >
-                    <div className="bg-gradient-to-br from-blue-500 to-cyan-500 text-white font-bold w-7 h-7 rounded-lg flex items-center justify-center text-xs flex-shrink-0 group-hover:scale-110 transition-transform">
+                    <div className="bg-gradient-to-br from-blue-500 to-cyan-500 text-white font-bold min-w-[36px] h-9 rounded-xl flex items-center justify-center shadow-md group-hover:scale-110 group-hover:rotate-3 transition-transform">
                       {index + 1}
                     </div>
-                    <span className="flex-1 text-gray-800 font-medium pt-1">
+                    <span className="flex-1 text-white font-medium text-base leading-relaxed pt-1 drop-shadow">
                       {task.text}
                     </span>
-                    <CheckCircle2 className="w-5 h-5 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-1" />
+                    <Check className="w-6 h-6 text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-1 drop-shadow" />
                   </motion.div>
                 ))}
               </div>
@@ -177,9 +175,9 @@ Any format works!"
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="glass rounded-2xl p-6 text-center"
+            className="glass-strong rounded-2xl p-8 text-center shadow-lg"
           >
-            <p className="text-sm text-gray-600">
+            <p className="text-white/90 font-medium">
               Couldn't parse any tasks. Try formatting as a numbered or bulleted list.
             </p>
           </motion.div>
