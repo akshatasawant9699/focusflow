@@ -65,9 +65,23 @@ export default function FocusPage() {
       // Fetch plan
       const response = await fetch(`/api/plans/${planId}`);
       const data = await response.json();
+
+      if (!data.plan) {
+        console.error('Plan not found:', data);
+        router.push('/today');
+        return;
+      }
+
       setPlan(data.plan);
 
-      const step = data.plan.steps.find((s: Step) => s.id === stepId);
+      const step = data.plan.steps?.find((s: Step) => s.id === stepId);
+
+      if (!step) {
+        console.error('Step not found:', stepId);
+        router.push('/today');
+        return;
+      }
+
       setCurrentStep(step);
 
       // Start focus session
