@@ -39,6 +39,27 @@ export default function FocusPage() {
     fetchPlanAndStartSession();
   }, [planId, stepId]);
 
+  // Global keyboard shortcut for brain dump (D key)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'd' || e.key === 'D') {
+        if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey) {
+          // Only if not typing in input
+          if (
+            document.activeElement?.tagName !== 'INPUT' &&
+            document.activeElement?.tagName !== 'TEXTAREA'
+          ) {
+            e.preventDefault();
+            setShowBrainDump(true);
+          }
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const fetchPlanAndStartSession = async () => {
     try {
       // Fetch plan
