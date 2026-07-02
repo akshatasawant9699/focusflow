@@ -48,23 +48,44 @@ The default setup uses SQLite and requires no external services. For Postgres mo
 
 ## Project Status
 
-FocusFlow is in active development. V1.0 MVP is targeted for 6-8 weeks from project start.
+**Current Phase:** Pre-MVP (Week 0)  
+**V1.0 MVP Target:** Mid-August 2026 (8-week build)  
+**Latest Update:** July 2, 2026
 
-**Current status**: Repository initialization and architecture planning.
+### What's Complete ✅
+- Comprehensive PRD with market analysis
+- Technical architecture defined
+- ADHD-specific design principles documented
+- 4 user personas validated
+- Repository structure and documentation
 
-**MVP scope**:
-- Paste-and-go task import with automatic list parsing
-- Manual plan creation with rule-based skeleton fallback
-- Single-task focus mode with timer and distraction parking
-- Today view showing top 3 active plans
-- Brain dump with global hotkey and voice capture
-- Energy and mood logging
-- Soft gamification (focus session streaks with grace days)
-- Docker-based self-hosting with SQLite and Postgres support
+### What's Next 🔨
+- Set up Next.js 14 + Drizzle ORM project structure
+- Build paste-and-go parser (FR-001)
+- Implement single-task focus mode (FR-002)
+- Create brain dump capture system (FR-003)
 
-**Not in MVP**: Calendar integration, browser extension, BYOK AI, body doubling, mobile native apps, Microsoft Graph, realtime cross-device sync.
+### V1.0 MVP Scope
 
-See [docs/roadmap.md](docs/roadmap.md) for the full roadmap.
+**Core Features (P0 — Must Have):**
+- ✨ Paste-and-go task import with automatic list parsing
+- 🎯 Single-task focus mode with timer and distraction parking
+- 🧠 Brain dump capture (global hotkey + voice)
+- 📋 Today view showing top 3 active plans
+- 📝 Manual plan creation with rule-based skeleton fallback
+- 💭 Energy and mood logging post-session
+- 🔥 Soft gamification (focus session streaks with grace days)
+- 🐳 Docker-based self-hosting (SQLite + Postgres support)
+
+**Not in MVP:** Calendar integration, browser extension, BYOK AI, body doubling, mobile native apps, Microsoft Graph, realtime cross-device sync (all planned for V1.1+)
+
+### Success Metrics (V1.0 Launch)
+- 50+ GitHub stars in first 2 weeks
+- 10+ successful self-hosting deployments
+- 3+ organic ADHD community mentions
+- 5+ user interviews confirm execution gap hypothesis
+
+See [docs/roadmap.md](docs/roadmap.md) for the complete feature timeline and [docs/PRD.md](docs/PRD.md) for detailed requirements.
 
 ## Technology Stack
 

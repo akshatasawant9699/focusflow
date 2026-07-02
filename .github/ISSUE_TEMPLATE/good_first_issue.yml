@@ -1,0 +1,97 @@
+name: 🌱 Good First Issue
+description: Create a beginner-friendly issue for new contributors
+title: "[Good First Issue]: "
+labels: ["good first issue", "help wanted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This template is for **maintainers** to create beginner-friendly issues for new contributors.
+
+        If you're a new contributor, please choose "Bug Report" or "Feature Request" instead.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Issue description
+      description: Clear, concise description of the task
+      placeholder: |
+        We need to add a loading state to the "Start Focus" button.
+        Currently, clicking the button doesn't provide visual feedback...
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: What does "done" look like?
+      placeholder: |
+        - [ ] Button shows spinner when clicked
+        - [ ] Button is disabled during loading
+        - [ ] Loading state clears after 500ms
+    validations:
+      required: true
+
+  - type: textarea
+    id: guidance
+    attributes:
+      label: Implementation guidance
+      description: |
+        Help new contributors succeed. Where should they start? What files to modify?
+      placeholder: |
+        1. Find the FocusButton component in `components/focus-mode/FocusButton.tsx`
+        2. Add a `loading` state with `useState`
+        3. Conditionally render a Spinner component (use shadcn/ui Spinner)
+        4. Add `disabled={loading}` to the button
+        5. Add tests in `tests/unit/FocusButton.test.tsx`
+    validations:
+      required: true
+
+  - type: dropdown
+    id: effort
+    attributes:
+      label: Effort estimate
+      description: How long should this take for a beginner?
+      options:
+        - "XS (under 1 hour)"
+        - "S (2-4 hours)"
+        - "M (1 day)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: skills
+    attributes:
+      label: Skills needed
+      description: What should a contributor know before tackling this?
+      multiple: true
+      options:
+        - Basic TypeScript
+        - React hooks
+        - Tailwind CSS
+        - Testing (Vitest)
+        - Git/GitHub basics
+    validations:
+      required: true
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: Helpful resources
+      description: Links to docs, examples, or related code
+      placeholder: |
+        - shadcn/ui Spinner: https://ui.shadcn.com/docs/components/spinner
+        - Similar component: components/plan-card/PlanCard.tsx (line 45)
+    validations:
+      required: false
+
+  - type: textarea
+    id: mentor
+    attributes:
+      label: Mentorship offer
+      description: Are you (or another maintainer) available to help?
+      placeholder: |
+        @akshatasawant9699 is available for questions in GitHub Discussions or PR reviews.
+    validations:
+      required: false
