@@ -1,6 +1,12 @@
-# FocusFlow
+# 🌱 FocusFlow
 
-Open-source focus companion for ADHD brains. You broke it down. Now do it.
+**You broke it down. Now do it.**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Project Status: Pre-MVP](https://img.shields.io/badge/status-pre--MVP-yellow)](docs/roadmap.md)
+
+Open-source focus companion that helps ADHD brains execute task breakdowns without overwhelm.
 
 ## What is FocusFlow?
 
@@ -19,11 +25,34 @@ FocusFlow picks up where breakdown tools stop. Paste a list of steps from anywhe
 - **No shame UI**: No overdue badges, no guilt copy. Grace days on streaks. Reframes as "let's pick up here" instead of "you failed."
 - **Self-hostable**: Run on your own hardware with `docker compose up`. SQLite or Postgres. Zero telemetry by default.
 
-## Why FocusFlow exists
+## Why FocusFlow Exists
 
-The ADHD productivity market is full of breakdown tools and scheduling tools. The gap nobody fills is the bridge from "I have a plan" to "I'm doing the thing." That's the gap FocusFlow fills.
+The ADHD productivity market is fragmented across breakdown tools (Goblin.tools, ChatGPT), planning tools (Notion, Tiimo), and accountability tools (Focusmate, Beeminder). **None bridge the execution gap** between "I have a plan" and "I'm doing the thing."
 
-We deliberately do not build an AI breakdown engine. We accept output from tools you already use. This keeps the scope tight, the cost zero, and positions FocusFlow as a community ally rather than a competitor.
+### The Execution Gap
+
+**Breakdown tools** (Goblin.tools, ChatGPT, Motion AI)  
+✅ Great at: Splitting tasks into steps  
+❌ Missing: Any help actually doing the steps
+
+**Planning tools** (Notion, Tiimo, Structured)  
+✅ Great at: Organizing and visualizing tasks  
+❌ Missing: Real-time focus support and distraction management
+
+**Accountability tools** (Focusmate, Flow Club, Beeminder)  
+✅ Great at: Social pressure and commitment  
+❌ Missing: Spontaneous support (require pre-booking), task integration
+
+**FocusFlow bridges all three:**  
+✨ Accepts breakdowns from any source (paste-and-go)  
+🎯 Provides real-time focus scaffolding (single-task mode, brain dumps)  
+🔥 Offers gentle accountability (streaks with grace days, no shame UI)
+
+### Positioning
+
+We deliberately **do not** build an AI breakdown engine. We accept output from tools you already use. This keeps the scope tight, the cost zero, and positions FocusFlow as a **community ally**, not a competitor.
+
+See [docs/PRD.md](docs/PRD.md) for detailed competitive analysis of 20+ tools.
 
 ## Getting Started
 
@@ -141,12 +170,12 @@ See [docs/design-principles.md](docs/design-principles.md) for the complete list
 
 ## Documentation
 
-- [Product Requirements Document](docs/PRD.md) - Full product specification
-- [Development Setup](docs/development.md) - Local development guide
-- [Self-Hosting Guide](docs/self-hosting.md) - Deployment options and configuration
-- [API Documentation](docs/api.md) - REST API specifications
-- [Design Principles](docs/design-principles.md) - ADHD-specific design constraints
-- [Roadmap](docs/roadmap.md) - Feature timeline and priorities
+- 📋 **[Product Requirements Document](docs/PRD.md)** - Full product specification with market analysis
+- 🗺️ **[Roadmap](docs/roadmap.md)** - Feature timeline from V1.0 MVP to V2.0+
+- 🎨 **[Design Principles](docs/design-principles.md)** - 7 ADHD-specific design constraints
+- 💻 **[Development Setup](docs/development.md)** - Local development, code standards, testing
+- 🐳 **[Self-Hosting Guide](docs/self-hosting.md)** - Docker deployment, backups, security
+- 📊 **[Notion Workspace](https://app.notion.com/p/FocusFlow-Project-Workspace-34ff086412b581fd9a0fe07e16055604)** - SDLC tasks, personas, risks register
 
 ## Community and Support
 
