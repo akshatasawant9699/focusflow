@@ -48,7 +48,7 @@ export default function TodayPage() {
     // Find the first pending step
     const nextStep = plan.steps.find(s => s.status === 'pending');
     if (nextStep) {
-      window.location.href = `/focus-demo?planId=${plan.id}&stepId=${nextStep.id}`;
+      window.location.href = `/focus?planId=${plan.id}&stepId=${nextStep.id}`;
     }
   };
 
