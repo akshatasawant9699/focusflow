@@ -63,36 +63,30 @@ export function MoodTracker() {
         </CardDescription>
       </CardHeader>
       <CardContent className="px-8 pb-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {moods.map((mood, index) => (
-            <div key={mood.id} className="relative">
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05, type: 'spring' }}
-                whileHover={{ scale: 1.05, y: -4 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => handleMoodSelect(mood.id)}
-                className={`group w-full rounded-2xl p-6 flex flex-col items-center gap-3 transition-shadow duration-300 hover:shadow-2xl bg-gradient-to-br ${mood.color} overflow-hidden`}
-              >
+            <motion.button
+              key={mood.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.05, type: 'spring' }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => handleMoodSelect(mood.id)}
+              className={`group relative rounded-2xl p-6 flex flex-col items-center gap-3 transition-all duration-200 hover:shadow-2xl hover:brightness-110 bg-gradient-to-br ${mood.color} overflow-hidden`}
+            >
               {/* Shine effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               {/* Content */}
               <div className="relative z-10 flex flex-col items-center">
-                <motion.div
-                  whileHover={{ scale: 1.2, rotate: [0, -10, 10, -10, 0] }}
-                  transition={{ duration: 0.5 }}
-                  className="text-6xl mb-2"
-                >
+                <div className="text-6xl mb-2">
                   {mood.emoji}
-                </motion.div>
+                </div>
                 <span className="text-base font-bold text-white drop-shadow-md">
                   {mood.label}
                 </span>
               </div>
-              </motion.button>
-            </div>
+            </motion.button>
           ))}
         </div>
       </CardContent>
