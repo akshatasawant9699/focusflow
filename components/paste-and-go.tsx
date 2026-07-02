@@ -32,13 +32,33 @@ export function PasteAndGo() {
     if (preview.length === 0) return;
 
     setIsCreating(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log('Creating plan with steps:', preview);
-    alert(`✨ Plan created with ${preview.length} steps!\\n\\nRedirecting to Today view...`);
-    setInput('');
-    setPreview([]);
-    setShowPreview(false);
-    setIsCreating(false);
+
+    try {
+      // Extract plan title from first step or use generic title
+      const title = preview[0]?.text.slice(0, 50) || 'New Plan';
+
+      const response = await fetch('/api/plans', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title,
+          steps: preview,
+          userId: 'demo-user',
+        }),
+      });
+
+      if (!response.ok) throw new Error('Failed to create plan');
+
+      const { plan } = await response.json();
+      console.log('Plan created:', plan);
+
+      // Redirect to Today view
+      window.location.href = '/today';
+    } catch (error) {
+      console.error('Error creating plan:', error);
+      alert('Failed to create plan. Please try again.');
+      setIsCreating(false);
+    }
   };
 
   const exampleTasks = `1. Research the topic

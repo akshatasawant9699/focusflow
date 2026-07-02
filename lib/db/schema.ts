@@ -1,4 +1,4 @@
-import { sql } from 'drizzle-orm';
+import { sql, relations } from 'drizzle-orm';
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
 
 // Users table
@@ -106,3 +106,49 @@ export type NewFocusSession = typeof focusSessions.$inferInsert;
 
 export type ParkedThought = typeof parkedThoughts.$inferSelect;
 export type NewParkedThought = typeof parkedThoughts.$inferInsert;
+
+// Relations
+export const usersRelations = relations(users, ({ many }) => ({
+  plans: many(plans),
+  focusSessions: many(focusSessions),
+  parkedThoughts: many(parkedThoughts),
+}));
+
+export const plansRelations = relations(plans, ({ one, many }) => ({
+  user: one(users, {
+    fields: [plans.userId],
+    references: [users.id],
+  }),
+  steps: many(steps),
+}));
+
+export const stepsRelations = relations(steps, ({ one, many }) => ({
+  plan: one(plans, {
+    fields: [steps.planId],
+    references: [plans.id],
+  }),
+  focusSessions: many(focusSessions),
+}));
+
+export const focusSessionsRelations = relations(focusSessions, ({ one, many }) => ({
+  user: one(users, {
+    fields: [focusSessions.userId],
+    references: [users.id],
+  }),
+  step: one(steps, {
+    fields: [focusSessions.stepId],
+    references: [steps.id],
+  }),
+  parkedThoughts: many(parkedThoughts),
+}));
+
+export const parkedThoughtsRelations = relations(parkedThoughts, ({ one }) => ({
+  user: one(users, {
+    fields: [parkedThoughts.userId],
+    references: [users.id],
+  }),
+  session: one(focusSessions, {
+    fields: [parkedThoughts.sessionId],
+    references: [focusSessions.id],
+  }),
+}));
