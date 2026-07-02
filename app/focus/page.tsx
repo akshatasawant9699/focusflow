@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { FocusTimer } from '@/components/focus-mode/focus-timer';
 import { BrainDumpModal } from '@/components/focus-mode/brain-dump-modal';
@@ -18,7 +18,7 @@ interface Plan {
   steps: Step[];
 }
 
-export default function FocusPage() {
+function FocusPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const planId = searchParams.get('planId');
@@ -221,5 +221,21 @@ export default function FocusPage() {
         onSave={handleSaveBrainDump}
       />
     </>
+  );
+}
+
+export default function FocusPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-purple-500 to-pink-500">
+          <div className="text-white text-2xl font-bold animate-pulse-slow">
+            Loading...
+          </div>
+        </div>
+      }
+    >
+      <FocusPageContent />
+    </Suspense>
   );
 }

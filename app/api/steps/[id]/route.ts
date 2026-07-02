@@ -6,9 +6,10 @@ import { eq } from 'drizzle-orm';
 // PATCH /api/steps/[id] - Update step status
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
     const { status } = body;
 
@@ -27,7 +28,7 @@ export async function PATCH(
     const [updatedStep] = await db
       .update(steps)
       .set(updates)
-      .where(eq(steps.id, params.id))
+      .where(eq(steps.id, id))
       .returning();
 
     if (!updatedStep) {

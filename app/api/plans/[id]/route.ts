@@ -6,11 +6,12 @@ import { eq } from 'drizzle-orm';
 // GET /api/plans/[id] - Fetch a single plan with steps
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const plan = await db.query.plans.findFirst({
-      where: eq(plans.id, params.id),
+      where: eq(plans.id, id),
       with: {
         steps: {
           orderBy: (steps, { asc }) => [asc(steps.order)],
@@ -35,9 +36,10 @@ export async function GET(
 // PATCH /api/plans/[id] - Update plan status
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
     const { status } = body;
 
@@ -51,7 +53,7 @@ export async function PATCH(
     const [updatedPlan] = await db
       .update(plans)
       .set({ status, updatedAt: new Date() })
-      .where(eq(plans.id, params.id))
+      .where(eq(plans.id, id))
       .returning();
 
     if (!updatedPlan) {

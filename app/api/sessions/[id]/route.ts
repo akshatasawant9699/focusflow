@@ -6,9 +6,10 @@ import { eq } from 'drizzle-orm';
 // PATCH /api/sessions/[id] - Update session (end, pause, add notes)
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
     const {
       endedAt,
@@ -37,7 +38,7 @@ export async function PATCH(
     const [updatedSession] = await db
       .update(focusSessions)
       .set(updates)
-      .where(eq(focusSessions.id, params.id))
+      .where(eq(focusSessions.id, id))
       .returning();
 
     if (!updatedSession) {
