@@ -1,48 +1,92 @@
 import { PasteAndGo } from '@/components/paste-and-go';
+import { MoodTracker } from '@/components/mood-tracker';
+import { Sparkles, Target, Brain, TrendingUp } from 'lucide-react';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <div className="container mx-auto px-4 py-16">
+    <main className="min-h-screen relative overflow-hidden">
+      {/* Floating orbs background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/30 rounded-full blur-3xl animate-float" />
+        <div className="absolute top-40 right-20 w-96 h-96 bg-pink-500/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-blue-500/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
+      </div>
+
+      <div className="container mx-auto px-4 py-12 relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            🌱 FocusFlow
+        <div className="text-center mb-12 animate-float">
+          <div className="inline-block mb-6">
+            <div className="text-8xl mb-4 animate-pulse-slow">🌱</div>
+          </div>
+          <h1 className="text-6xl md:text-7xl font-black mb-4 bg-gradient-to-r from-white via-purple-100 to-white bg-clip-text text-transparent drop-shadow-2xl">
+            FocusFlow
           </h1>
-          <p className="text-xl text-muted-foreground mb-2">
+          <p className="text-2xl md:text-3xl font-bold text-white mb-3 drop-shadow-lg">
             You broke it down. Now do it.
           </p>
-          <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-white/90 max-w-3xl mx-auto drop-shadow-md">
             Open-source focus companion that helps ADHD brains execute task breakdowns without overwhelm.
+            <br />
             Paste your tasks from anywhere and start focusing in under 15 seconds.
           </p>
         </div>
 
-        {/* Main Content */}
-        <div className="max-w-3xl mx-auto">
-          <PasteAndGo />
+        {/* Mood Tracker - Daily Check-in */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <MoodTracker />
+        </div>
 
-          {/* Design Principles Preview */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-            <div className="p-4 rounded-lg border bg-card">
-              <div className="font-semibold mb-1">🎯 Single-Task Focus</div>
-              <p className="text-muted-foreground">
-                Only one step visible at a time. No sidebar clutter.
-              </p>
+        {/* Main Content */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <PasteAndGo />
+        </div>
+
+        {/* Feature Cards */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+          <div className="glass-strong rounded-2xl p-6 hover:scale-105 transition-transform duration-300 group">
+            <div className="bg-gradient-to-br from-purple-500 to-pink-500 w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:rotate-12 transition-transform">
+              <Sparkles className="w-6 h-6 text-white" />
             </div>
-            <div className="p-4 rounded-lg border bg-card">
-              <div className="font-semibold mb-1">🧠 Brain Dump Capture</div>
-              <p className="text-muted-foreground">
-                Global hotkey to park distractions without losing focus.
-              </p>
-            </div>
-            <div className="p-4 rounded-lg border bg-card">
-              <div className="font-semibold mb-1">🚫 No Shame UI</div>
-              <p className="text-muted-foreground">
-                Grace days on streaks. Positive reframes. No guilt.
-              </p>
-            </div>
+            <h3 className="font-bold text-lg text-gray-800 mb-2">Paste & Go</h3>
+            <p className="text-gray-600 text-sm">
+              Copy tasks from anywhere. Start in 15 seconds.
+            </p>
           </div>
+
+          <div className="glass-strong rounded-2xl p-6 hover:scale-105 transition-transform duration-300 group">
+            <div className="bg-gradient-to-br from-blue-500 to-cyan-500 w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:rotate-12 transition-transform">
+              <Target className="w-6 h-6 text-white" />
+            </div>
+            <h3 className="font-bold text-lg text-gray-800 mb-2">Single-Task Focus</h3>
+            <p className="text-gray-600 text-sm">
+              One step at a time. No sidebar clutter.
+            </p>
+          </div>
+
+          <div className="glass-strong rounded-2xl p-6 hover:scale-105 transition-transform duration-300 group">
+            <div className="bg-gradient-to-br from-pink-500 to-rose-500 w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:rotate-12 transition-transform">
+              <Brain className="w-6 h-6 text-white" />
+            </div>
+            <h3 className="font-bold text-lg text-gray-800 mb-2">Brain Dump</h3>
+            <p className="text-gray-600 text-sm">
+              Park distractions instantly with global hotkey.
+            </p>
+          </div>
+
+          <div className="glass-strong rounded-2xl p-6 hover:scale-105 transition-transform duration-300 group">
+            <div className="bg-gradient-to-br from-green-500 to-emerald-500 w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:rotate-12 transition-transform">
+              <TrendingUp className="w-6 h-6 text-white" />
+            </div>
+            <h3 className="font-bold text-lg text-gray-800 mb-2">No Shame UI</h3>
+            <p className="text-gray-600 text-sm">
+              Grace days. Positive reframes. No guilt.
+            </p>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="text-center text-white/80 text-sm">
+          <p>Built with 💜 for the ADHD community • Open source • Privacy-first</p>
         </div>
       </div>
     </main>
