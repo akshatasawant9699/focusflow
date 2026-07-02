@@ -42,8 +42,8 @@ export default function Home() {
         </div>
 
         {/* Feature Cards */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          <div className="glass-strong rounded-3xl p-8 hover:scale-105 hover:-translate-y-2 transition-all duration-300 group shadow-xl">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div className="glass-strong rounded-3xl p-8 hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 group shadow-xl will-change-transform">
             <div className="bg-gradient-to-br from-purple-500 to-pink-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform shadow-lg">
               <Sparkles className="w-8 h-8 text-white" />
             </div>
@@ -53,7 +53,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="glass-strong rounded-3xl p-8 hover:scale-105 hover:-translate-y-2 transition-all duration-300 group shadow-xl">
+          <div className="glass-strong rounded-3xl p-8 hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 group shadow-xl will-change-transform">
             <div className="bg-gradient-to-br from-blue-500 to-cyan-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform shadow-lg">
               <Target className="w-8 h-8 text-white" />
             </div>
@@ -63,7 +63,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="glass-strong rounded-3xl p-8 hover:scale-105 hover:-translate-y-2 transition-all duration-300 group shadow-xl">
+          <div className="glass-strong rounded-3xl p-8 hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 group shadow-xl will-change-transform">
             <div className="bg-gradient-to-br from-pink-500 to-rose-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform shadow-lg">
               <Brain className="w-8 h-8 text-white" />
             </div>
@@ -73,7 +73,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="glass-strong rounded-3xl p-8 hover:scale-105 hover:-translate-y-2 transition-all duration-300 group shadow-xl">
+          <div className="glass-strong rounded-3xl p-8 hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 group shadow-xl will-change-transform">
             <div className="bg-gradient-to-br from-green-500 to-emerald-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform shadow-lg">
               <TrendingUp className="w-8 h-8 text-white" />
             </div>
