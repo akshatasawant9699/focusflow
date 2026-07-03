@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -19,12 +19,59 @@ const moods = [
 export function MoodTracker() {
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [hasTrackedToday, setHasTrackedToday] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const handleMoodSelect = (moodId: string) => {
-    setSelectedMood(moodId);
-    setHasTrackedToday(true);
-    console.log('Mood tracked:', moodId);
+  // Check if user has already tracked today
+  useEffect(() => {
+    const checkTodaysMood = async () => {
+      try {
+        const response = await fetch('/api/moods?userId=demo-user');
+        const data = await response.json();
+
+        if (data.loggedToday) {
+          setSelectedMood(data.todaysMood);
+          setHasTrackedToday(true);
+        }
+      } catch (error) {
+        console.error('Error checking mood:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkTodaysMood();
+  }, []);
+
+  const handleMoodSelect = async (moodId: string) => {
+    try {
+      const response = await fetch('/api/moods', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: 'demo-user',
+          mood: moodId,
+        }),
+      });
+
+      if (response.ok) {
+        setSelectedMood(moodId);
+        setHasTrackedToday(true);
+        console.log('Mood tracked:', moodId);
+      }
+    } catch (error) {
+      console.error('Error tracking mood:', error);
+    }
   };
+
+  if (loading) {
+    return (
+      <Card className="glass-strong border-white/30 shadow-2xl overflow-hidden">
+        <CardContent className="p-12 text-center">
+          <div className="text-white text-lg animate-pulse-slow">Loading...</div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   if (hasTrackedToday && selectedMood) {
     const mood = moods.find(m => m.id === selectedMood);

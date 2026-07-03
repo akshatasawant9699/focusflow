@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { FocusTimer } from '@/components/focus-mode/focus-timer';
 import { BrainDumpModal } from '@/components/focus-mode/brain-dump-modal';
+import { PostSessionModal } from '@/components/focus-mode/post-session-modal';
 
 interface Step {
   id: string;
@@ -28,6 +29,7 @@ function FocusPageContent() {
   const [currentStep, setCurrentStep] = useState<Step | null>(null);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [showBrainDump, setShowBrainDump] = useState(false);
+  const [showPostSession, setShowPostSession] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -113,6 +115,17 @@ function FocusPageContent() {
   };
 
   const handleComplete = async () => {
+    if (!currentStep) return;
+
+    // Show post-session modal first
+    setShowPostSession(true);
+  };
+
+  const handlePostSessionSave = async (data: {
+    focusQuality: string;
+    energyLevel: string;
+    notes: string;
+  }) => {
     if (!currentStep || !sessionId) return;
 
     try {
@@ -123,12 +136,15 @@ function FocusPageContent() {
         body: JSON.stringify({ status: 'done' }),
       });
 
-      // End session
+      // End session with mood/energy data
       await fetch(`/api/sessions/${sessionId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           endedAt: new Date().toISOString(),
+          focusQuality: data.focusQuality,
+          energyLevel: data.energyLevel,
+          notes: data.notes,
           completed: true,
         }),
       });
@@ -219,6 +235,13 @@ function FocusPageContent() {
         isOpen={showBrainDump}
         onClose={() => setShowBrainDump(false)}
         onSave={handleSaveBrainDump}
+      />
+
+      <PostSessionModal
+        isOpen={showPostSession}
+        onClose={() => setShowPostSession(false)}
+        onSave={handlePostSessionSave}
+        stepText={currentStep?.text || ''}
       />
     </>
   );

@@ -91,6 +91,21 @@ export const parkedThoughts = sqliteTable('parked_thoughts', {
     .notNull(),
 });
 
+// Mood logs table (daily mood tracking)
+export const moodLogs = sqliteTable('mood_logs', {
+  id: text('id').primaryKey().$defaultFn(() => crypto.randomUUID()),
+  userId: text('user_id')
+    .references(() => users.id, { onDelete: 'cascade' })
+    .notNull(),
+  mood: text('mood', {
+    enum: ['amazing', 'great', 'good', 'okay', 'tired', 'stressed', 'sad', 'angry'],
+  }).notNull(),
+  date: text('date').notNull(), // YYYY-MM-DD format
+  createdAt: integer('created_at', { mode: 'timestamp' })
+    .$defaultFn(() => new Date())
+    .notNull(),
+});
+
 // Types for TypeScript
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
@@ -107,11 +122,15 @@ export type NewFocusSession = typeof focusSessions.$inferInsert;
 export type ParkedThought = typeof parkedThoughts.$inferSelect;
 export type NewParkedThought = typeof parkedThoughts.$inferInsert;
 
+export type MoodLog = typeof moodLogs.$inferSelect;
+export type NewMoodLog = typeof moodLogs.$inferInsert;
+
 // Relations
 export const usersRelations = relations(users, ({ many }) => ({
   plans: many(plans),
   focusSessions: many(focusSessions),
   parkedThoughts: many(parkedThoughts),
+  moodLogs: many(moodLogs),
 }));
 
 export const plansRelations = relations(plans, ({ one, many }) => ({
@@ -150,5 +169,12 @@ export const parkedThoughtsRelations = relations(parkedThoughts, ({ one }) => ({
   session: one(focusSessions, {
     fields: [parkedThoughts.sessionId],
     references: [focusSessions.id],
+  }),
+}));
+
+export const moodLogsRelations = relations(moodLogs, ({ one }) => ({
+  user: one(users, {
+    fields: [moodLogs.userId],
+    references: [users.id],
   }),
 }));
