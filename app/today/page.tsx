@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Target, Play, CheckCircle2, Plus, ArrowLeft, Trophy } from 'lucide-react';
 import Link from 'next/link';
+import { StreakWidget } from '@/components/streak-widget';
 
 interface Step {
   id: string;
@@ -96,6 +97,11 @@ export default function TodayPage() {
               Back Home
             </Button>
           </Link>
+        </div>
+
+        {/* Streak Widget */}
+        <div className="mb-12">
+          <StreakWidget />
         </div>
 
         {/* Active Plans */}
